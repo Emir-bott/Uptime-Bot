@@ -35,8 +35,13 @@ db.set("linkler", [])
 }
 })
 
+client.on('ready', () => {
+    const kanal = client.channels.cache.get("1269653881097424947");
+    if (kanal) kanal.send(`${db.get("linkler").length} bot pinglendi!`);
+});
+
 client.on("ready", () => {
-  client.user.setActivity(`.help | ${db.get("linkler").length} / ${client.guilds.size}`)
+  client.user.setActivity(`.help | ${db.get("linkler").length} Aktif BOT!`)
   console.log(`Logined - 7`)
 })
 
@@ -64,7 +69,7 @@ client.on("message", message => {
   var spl = message.content.split(" ");
   if(spl[0] == ".say") {
   var link = spl[1]
- message.channel.send(`${db.get("linkler").length} / ${client.guilds.size}`)
+ message.channel.send(`${db.get("linkler").length} Aktif`)
 }})
 
 
