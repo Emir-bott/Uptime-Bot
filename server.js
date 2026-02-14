@@ -35,14 +35,9 @@ db.set("linkler", [])
 }
 })
 
-client.on('ready', () => {
-    const kanal = client.channels.cache.get("1269653881097424947");
-    if (kanal) kanal.send(`${db.get("linkler").length} bot pinglendi!`);
-});
-
 client.on("ready", () => {
   client.user.setActivity(`.help | ${db.get("linkler").length} Aktif BOT!`)
-  console.log(`Logined - 7`)
+  console.log(`Bot Aktif!`)
 })
 
 // Zed sizi seviyor.
