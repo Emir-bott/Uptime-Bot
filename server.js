@@ -2,7 +2,7 @@ require("express")().listen(1343);
 const db = require("quick.db");
 const discord = require("discord.js");
 const client = new discord.Client({ disableEveryone: true });
-client.login("Token"); // UYGULAMA TOKEN'INIZI GİRMEYİ UNUTMAYIN! - İŞLEMLERİ DİKKATLİ YAPIN.
+client.login(process.env.TOKEN); // UYGULAMA TOKEN'INIZI GİRMEYİ UNUTMAYIN! - İŞLEMLERİ DİKKATLİ YAPIN.
 const fetch = require("node-fetch");
 const fs = require('fs')
 
@@ -25,7 +25,7 @@ db.set("linkler", [])
 })
 
 client.on("ready", () => {
-  client.user.setActivity(`u.help | ${db.get("linkler").length} / ${client.guilds.size}`)
+  client.user.setActivity(`.help | ${db.get("linkler").length} / ${client.guilds.size}`)
   console.log(`Logined - 7`)
 })
 
@@ -34,7 +34,7 @@ client.on("ready", () => {
 client.on("message", message => {
   if(message.author.bot) return;
   var spl = message.content.split(" ");
-  if(spl[0] == "z!ekle") {
+  if(spl[0] == ".ekle") {
   var link = spl[1]
   fetch(link).then(() => {
     if(db.get("linkler").map(z => z.url).includes(link)) return message.channel.send("Bu site daha önce veri tabanına eklenmiş durumda, geçersiz işlem.")
@@ -51,7 +51,7 @@ client.on("message", message => {
 client.on("message", message => {
   if(message.author.bot) return;
   var spl = message.content.split(" ");
-  if(spl[0] == "z!sitesay") {
+  if(spl[0] == ".say") {
   var link = spl[1]
  message.channel.send(`${db.get("linkler").length} / ${client.guilds.size}`)
 }})
@@ -63,22 +63,19 @@ const Discord = require('discord.js');
 client.on("message", message => {
   if(message.author.bot) return;
     var spl = message.content.split(" ");
-  if(spl[0] == "z!yardım") {
+  if(spl[0] == ".help") {
 let embed = new Discord.RichEmbed()
 .setColor('GREY')
 .addField(`Uptime Bot`, `Bot'a hedef siteyi girerek sürekli uptime olmasını sağlarsınız.`)
 .addField(`Genel Komutlar`,`
 
-**z!yardım** *-* Yardım menüsü
-**z!ekle** *-* Veri tabanına site eklersiniz
-**z!sitesay** *-* Sistemde kaç site olduğunu listeler
+**.yardım** *-* Yardım menüsü
+**.ekle** *-* Veri tabanına site eklersiniz
+**.say** *-* Sistemde kaç site olduğunu listeler
 `)
-.addField(`Linkimiz`, `[0017](https://discord.gg/0017)
-[Botumuzu ekleme linki](Bot URL'i / Discord permissions sitesinden alabilirsiniz.)
-[Destek sunucu linkimiz](https://discord.gg/0017)`)
 .setThumbnail(client.user.avatarURL)
 .setAuthor(`Uptime`, client.user.avatarURL)
-.setFooter(`2020 © Uptime Bot | Zed on the deadline.`, client.user.avatarURL)
+.setFooter(`2026 © Uptime Bot | Raxion on the deadline.`, client.user.avatarURL)
 return message.channel.send(embed);
     }
  
@@ -90,7 +87,7 @@ client.on("message", async message => {
 
   if(!message.content.startsWith("u.eval")) return;
   if(!["id","id"].includes(message.author.id)) return;
-  var args = message.content.split("u.eval")[1]
+  var args = message.content.split(".eval")[1]
   if(!args) return message.channel.send("Hyr! :(")
   
       const code = args
