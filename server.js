@@ -6,6 +6,17 @@ client.login(process.env.TOKEN); // UYGULAMA TOKEN'INIZI GİRMEYİ UNUTMAYIN! - 
 const fetch = require("node-fetch");
 const fs = require('fs')
 
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Bot 7/24 Aktif Hacım!');
+});
+
+app.listen(3000, () => {
+  console.log('Bot kapıları açtı, 3000 portundan dinliyoruz!');
+});
+
 setInterval(() => {
   var links = db.get("linkler");
   if(!links) return;
